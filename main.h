@@ -2,7 +2,7 @@
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
 
-#define relay_pin 2
+#define relay_pin 13
 
 
 #ifndef STASSID
@@ -20,7 +20,7 @@ void handleRoot() {
 }
 
 void handlePress() {
-  server.send(202, "text/json", "{\"result\":\"acceted\", \"option\":\"press\"}");
+  server.send(202, "text/json", "{\"result\":\"accepted\", \"option\":\"press\"}");
   digitalWrite(relay_pin, LOW);
   delay(100);
   digitalWrite(relay_pin, HIGH);
@@ -28,7 +28,7 @@ void handlePress() {
 
 
 void handleLongPress() {
-  server.send(202, "text/json", "{\"result\":\"acceted\", \"option\":\"long-press\"}");
+  server.send(202, "text/json", "{\"result\":\"accepted\", \"option\":\"long-press\"}");
   digitalWrite(relay_pin, LOW);
   delay(6000);
   digitalWrite(relay_pin, HIGH);
@@ -41,6 +41,7 @@ void handleNotFound() {
 
 void setup(void) {
   pinMode(relay_pin , OUTPUT);
+  digitalWrite(relay_pin, LOW);
   digitalWrite(relay_pin, HIGH);
 
   Serial.begin(115200);
